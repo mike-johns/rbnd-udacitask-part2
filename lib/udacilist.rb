@@ -27,5 +27,10 @@ class UdaciList
         puts "#{position + 1}) #{item.details}"
       end
     end
+    def print
+      table = Terminal::Table.new :title => "UdaciList: #{@title}", :headings=> ["Description", "Due Date"]
+      @items.each {|item| table.add_row([item.description, item.due])}
+      puts table
+    end
   end
 end
