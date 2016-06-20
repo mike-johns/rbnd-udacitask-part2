@@ -7,19 +7,25 @@ class UdaciList
   end
   def add(type, description, options={})
     type = type.downcase
-    @items.push TodoItem.new(description, options) if type == "todo"
-    @items.push EventItem.new(description, options) if type == "event"
-    @items.push LinkItem.new(description, options) if type == "link"
-  end
-  def delete(index)
-    @items.delete_at(index - 1)
-  end
-  def all
-    puts "-" * @title.length
-    puts @title
-    puts "-" * @title.length
-    @items.each_with_index do |item, position|
-      puts "#{position + 1}) #{item.details}"
+    if type == "todo"
+      @items.push TodoItem.new(description, options)
+    elsif type == "event"
+      @items.push EventItem.new(description, options)
+    elsif type == "link"
+      @items.push LinkItem.new(description, options)
+    else
+      raise UdaciListErrors::InvalidItemType, "Sorry, '#{type}' is not a valid item type."
+    end
+    def delete(index)
+      @items.delete_at(index - 1)
+    end
+    def all
+      puts "-" * @title.length
+      puts @title
+      puts "-" * @title.length
+      @items.each_with_index do |item, position|
+        puts "#{position + 1}) #{item.details}"
+      end
     end
   end
 end
