@@ -1,11 +1,12 @@
 class EventItem
   include Listable
-  attr_reader :description, :start_date, :end_date
+  attr_reader :description, :start_date, :end_date, :priority
 
   def initialize(description, options={})
     @description = description
     @start_date = Chronic.parse(options[:start_date]) if options[:start_date]
     @end_date = Chronic.parse(options[:end_date]) if options[:end_date]
+    @priority = options[:priority]
   end
 
   def format_date
@@ -16,6 +17,6 @@ class EventItem
   end
 
   def details
-    format_description(@description) + "event dates: " + format_date
+    "Event Dates: #{format_date} #{format_priority(:priority => @priority)}"
   end
 end

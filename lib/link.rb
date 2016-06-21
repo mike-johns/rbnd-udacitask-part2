@@ -1,10 +1,11 @@
 class LinkItem
   include Listable
-  attr_reader :description, :site_name
+  attr_reader :description, :site_name, :priority
 
   def initialize(url, options={})
     @description = url
     @site_name = options[:site_name]
+    @priority = options[:priority]
   end
 
   def format_name
@@ -12,6 +13,6 @@ class LinkItem
   end
 
   def details
-    format_description(@description) + "site name: " + format_name
+    "Site Name: #{format_name} #{format_priority(:priority => @priority)}"
   end
 end

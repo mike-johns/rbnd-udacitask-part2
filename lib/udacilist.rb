@@ -20,16 +20,18 @@ class UdaciList
       @items.delete_at(index - 1)
     end
     def all
-      puts "-" * @title.length
-      puts @title
-      puts "-" * @title.length
-      @items.each_with_index do |item, position|
-        puts "#{position + 1}) #{item.details}"
+      table = Terminal::Table.new :title => "UdaciList: #{@title}", :headings=> ["#", "Title", "Details"]
+      @items.each_with_index do |item, index|
+        if item.priority == "high"
+          table.add_row ["#{index + 1}".red, item.format_description(item.description).red, item.details.red]
+        elsif item.priority == "medium"
+          table.add_row ["#{index + 1}".yellow, item.format_description(item.description).yellow, item.details.yellow]
+        elsif item.priority == "low"
+          table.add_row ["#{index + 1}".green, item.format_description(item.description).green, item.details.green]
+        else
+          table.add_row ["#{index + 1}", item.format_description(item.description), item.details]
+        end
       end
-    end
-    def print
-      table = Terminal::Table.new :title => "UdaciList: #{@title}", :headings=> ["Description", "Due Date"]
-      @items.each {|item| table.add_row([item.description, item.due])}
       puts table
     end
   end
