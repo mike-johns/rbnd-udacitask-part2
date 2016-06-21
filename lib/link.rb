@@ -1,6 +1,7 @@
 class LinkItem
   include Listable
-  attr_reader :description, :site_name, :priority
+  attr_reader :description, :site_name
+  attr_accessor :priority
 
   def initialize(url, options={})
     @description = url

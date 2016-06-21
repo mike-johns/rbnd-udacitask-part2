@@ -1,6 +1,7 @@
 class EventItem
   include Listable
-  attr_reader :description, :start_date, :end_date, :priority
+  attr_reader :description, :start_date, :end_date
+  attr_accessor :priority
 
   def initialize(description, options={})
     @description = description
@@ -11,7 +12,7 @@ class EventItem
 
   def format_date
     dates = @start_date.strftime("%D") if @start_date
-    dates << " -- " + @end_date.strftime("%D") if @end_date
+    dates << " - " + @end_date.strftime("%D") if @end_date
     dates = "N/A" if !dates
     return dates
   end

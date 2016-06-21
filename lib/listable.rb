@@ -19,4 +19,16 @@ module Listable
     result = "URL" if type == "LinkItem"
     return result
   end
+
+  def high
+    self.priority = "high"
+  end
+
+  def medium
+    self.priority = "medium"
+  end
+
+  def low
+    self.priority = "low"
+  end
 end
