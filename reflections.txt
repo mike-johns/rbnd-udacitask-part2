@@ -8,7 +8,7 @@
 
   a) Users are able to change the priority of an existing item! Just use list.high 1 --or-- list.medium 3 --or-- list.low 5 (where the number is the displayed item number). The table will redraw itself.
 
-  b) 
+  b) The printed table highlights the entire item in its priority color. This may seem like a small feature, but if you look at udacilist.rb's 'fill_table' method, you'll see how I put the 'colorize' gem to work to do it.
 
 # REFLECTIONS
 # -------------------------------------------------------
