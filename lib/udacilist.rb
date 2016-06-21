@@ -20,16 +20,16 @@ class UdaciList
       @items.delete_at(index - 1)
     end
     def all
-      table = Terminal::Table.new :title => "UdaciList: #{@title}", :headings=> ["#", "Title", "Details"]
+      table = Terminal::Table.new :title => "UdaciList: #{@title}".light_magenta, :headings=> ["#".light_magenta, "Title".light_magenta, "Type".light_magenta, "Details".light_magenta]
       @items.each_with_index do |item, index|
         if item.priority == "high"
-          table.add_row ["#{index + 1}".red, item.format_description(item.description).red, item.details.red]
+          table.add_row ["#{index + 1}".red, item.format_description(item.description).red, item.format_class.red, item.details.red]
         elsif item.priority == "medium"
-          table.add_row ["#{index + 1}".yellow, item.format_description(item.description).yellow, item.details.yellow]
+          table.add_row ["#{index + 1}".yellow, item.format_description(item.description).yellow, item.format_class.yellow, item.details.yellow]
         elsif item.priority == "low"
-          table.add_row ["#{index + 1}".green, item.format_description(item.description).green, item.details.green]
+          table.add_row ["#{index + 1}".green, item.format_description(item.description).green, item.format_class.green, item.details.green]
         else
-          table.add_row ["#{index + 1}", item.format_description(item.description), item.details]
+          table.add_row ["#{index + 1}", item.format_description(item.description), item.format_class, item.details]
         end
       end
       puts table

@@ -3,9 +3,6 @@ module Listable
     "#{description}".ljust(25)
   end
 
-  def format_date
-  end
-
   def format_priority(options = {})
     priority = options[:priority]
     value = " ⇧".red if priority == "high"
@@ -13,5 +10,13 @@ module Listable
     value = " ⇩".green if priority == "low"
     value = "" if !priority
     return value
+  end
+
+  def format_class
+    type = self.class.to_s
+    result = "Task" if type == "TodoItem"
+    result = "Event" if type == "EventItem"
+    result = "URL" if type == "LinkItem"
+    return result
   end
 end
