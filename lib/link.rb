@@ -6,7 +6,7 @@ class LinkItem
   def initialize(url, options={})
     @description = url
     @site_name = options[:site_name]
-    @priority = options[:priority]
+    @priority = check_priority_value(options[:priority])
   end
 
   def format_name

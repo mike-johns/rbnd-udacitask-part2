@@ -6,7 +6,7 @@ class TodoItem
   def initialize(description, options={})
     @description = description
     @due = options[:due] ? Chronic.parse(options[:due]) : options[:due]
-    @priority = options[:priority]
+    @priority = check_priority_value(options[:priority])
   end
 
   def format_date

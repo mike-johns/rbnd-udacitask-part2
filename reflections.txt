@@ -1,13 +1,29 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+
+  I used 'terminal-table' so that I could rewrite UdaciList's 'all' method - it now displays a really clean table. The way I used it also allowed me to draw a new table when the user changes an existing item's priority with my first new feature...
+
 2. Describe the 2 features you added to the project.
-  a) Feature 1...
-  b) Feature 2...
+
+  a) Users are able to change the priority of an existing item! Just use list.high 1 --or-- list.medium 3 --or-- list.low 5 (where the number is the displayed item number). The table will redraw itself.
+
+  b) 
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+
+  I spent about 8 hours working on this, best I can remember. I should probably start tracking that...
+
 2. What was the most rewarding challenge you conquered?
+
+  I feel like I really got my head around gems and their integration into a new project.
+
 3. What two additional features did you build? Why?
+
+  Both features I added (that are listed above) were chosen when I put myself in the mind of the end user. I asked myself, "What would make me want to use this?" and those features were two of the answers.
+
 4. Where do you still have room to grow?
+
+  I find myself resorting to the GitHub desktop app out of convenience - I feel like I need to get more comfortable working in the command line.

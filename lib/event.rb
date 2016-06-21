@@ -7,7 +7,7 @@ class EventItem
     @description = description
     @start_date = Chronic.parse(options[:start_date]) if options[:start_date]
     @end_date = Chronic.parse(options[:end_date]) if options[:end_date]
-    @priority = options[:priority]
+    @priority = check_priority_value(options[:priority])
   end
 
   def format_date

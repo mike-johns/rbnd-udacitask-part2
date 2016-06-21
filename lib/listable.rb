@@ -19,4 +19,16 @@ module Listable
     result = "URL" if type == "LinkItem"
     return result
   end
+
+  def check_priority_value(input)
+    if input
+      if (input == "high" || input == "medium" || input == "low")
+        return input
+      else
+        raise UdaciListErrors::InvalidPriorityValue, "That's not a valid priority level."
+      end
+    else
+      return nil
+    end
+  end
 end

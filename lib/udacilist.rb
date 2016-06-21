@@ -23,19 +23,27 @@ class UdaciList
     index <= (@items.count + 1) ? @items.delete_at(index - 1) : (raise UdaciListErrors::IndexExceedsListSize, "Invalid item number, try again.")
   end
 
-  def all
-    table = Terminal::Table.new :title => "UdaciList: #{@title}".light_magenta, :headings=> ["#".light_magenta, "Title".light_magenta, "Type".light_magenta, "Details".light_magenta]
-    @items.each_with_index do |item, index|
+  def create_table(title_as_string)
+    Terminal::Table.new :title => title_as_string.light_magenta, :headings=> ["#".light_magenta, "Title".light_magenta, "Type".light_magenta, "Details".light_magenta]
+  end
+
+  def fill_table(target_table, array_of_items)
+    array_of_items.each_with_index do |item, index|
       if item.priority == "high"
-        table.add_row ["#{index + 1}".red, item.format_description(item.description).red, item.format_class.red, item.details.red]
+        target_table.add_row ["#{index + 1}".red, item.format_description(item.description).red, item.format_class.red, item.details.red]
       elsif item.priority == "medium"
-        table.add_row ["#{index + 1}".yellow, item.format_description(item.description).yellow, item.format_class.yellow, item.details.yellow]
+        target_table.add_row ["#{index + 1}".yellow, item.format_description(item.description).yellow, item.format_class.yellow, item.details.yellow]
       elsif item.priority == "low"
-        table.add_row ["#{index + 1}".green, item.format_description(item.description).green, item.format_class.green, item.details.green]
+        target_table.add_row ["#{index + 1}".green, item.format_description(item.description).green, item.format_class.green, item.details.green]
       else
-        table.add_row ["#{index + 1}", item.format_description(item.description), item.format_class, item.details]
+        target_table.add_row ["#{index + 1}", item.format_description(item.description), item.format_class, item.details]
       end
     end
+  end
+
+  def all
+    table = create_table("Udacitask: #{@title}")
+    fill_table(table, @items)
     puts table
   end
 
@@ -55,6 +63,10 @@ class UdaciList
   end
 
   def filter(type)
-    # TODO: Display only a certain type of item. Probably go thru items array, add to new array if .class.to_s == whatever, then #all the array
+    filtered_items = []
+    @items.each {|item| item.format_class == type ? filtered_items << item : nil}
+    results = create_table("Filtered: #{type}s Only")
+    fill_table(results, filtered_items)
+    puts results
   end
 end
