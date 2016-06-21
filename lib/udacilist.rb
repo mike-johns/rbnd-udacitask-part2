@@ -20,7 +20,7 @@ class UdaciList
   end
 
   def delete(index)
-    index <= (@items.count + 1) ? @items.delete_at(index - 1) : (raise UdaciListErrors::IndexExceedsListSize, "Invalid item number, try again.")
+    index <= (@items.count) ? @items.delete_at(index - 1) : (raise UdaciListErrors::IndexExceedsListSize, "Invalid item number, try again.")
   end
 
   def create_table(title_as_string)
@@ -63,10 +63,14 @@ class UdaciList
   end
 
   def filter(type)
-    filtered_items = []
-    @items.each {|item| item.format_class == type ? filtered_items << item : nil}
-    results = create_table("Filtered: #{type}s Only")
-    fill_table(results, filtered_items)
-    puts results
+    if (type.downcase == "task" || type.downcase == "event" || type.downcase == "url")
+      filtered_items = []
+      @items.each {|item| item.format_class.downcase == type ? filtered_items << item : nil}
+      results = create_table("Filtered: #{type.capitalize}s Only")
+      fill_table(results, filtered_items)
+      puts results
+    else
+      puts "That's not a valid Type. Try 'Task', 'Event', or 'URL' instead."
+    end
   end
 end
