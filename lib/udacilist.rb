@@ -68,7 +68,7 @@ class UdaciList
       @items.each {|item| item.format_class.downcase == type ? filtered_items << item : nil}
       results = create_table("Filtered: #{type.capitalize}s Only")
       fill_table(results, filtered_items)
-      puts results
+      filtered_items.count > 0 ? (puts results) : (puts "There are no #{type.capitalize}s in this list.")
     else
       puts "That's not a valid Type. Try 'Task', 'Event', or 'URL' instead."
     end
