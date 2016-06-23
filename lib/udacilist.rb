@@ -2,7 +2,7 @@ class UdaciList
   attr_reader :title, :items
 
   def initialize(options={})
-    @title = options[:title]
+    @title = options[:title] ? options[:title] : "Untitled List"
     @items = []
   end
 
@@ -20,7 +20,11 @@ class UdaciList
   end
 
   def delete(index)
-    index <= (@items.count) ? @items.delete_at(index - 1) : (raise UdaciListErrors::IndexExceedsListSize, "Invalid item number, try again.")
+    if index <= @items.count
+      @items.delete_at(index - 1)
+    else
+      raise UdaciListErrors::IndexExceedsListSize, "Invalid item number, try again."
+    end
   end
 
   def create_table(title_as_string)
